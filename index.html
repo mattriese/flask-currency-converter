@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Currency Converter</title>
+</head>
+<body>
+	<h1>Currency Converter</h1>
+	<hr>
+	<form action="/results">
+		Converting from:
+		<input type="text" name="converting_from" value>
+		<br>
+		Converting to:
+		<input  type="text" name="converting_to">
+		<br>
+		Amount:
+		<input type="text" name="amount">
+		<br>
+		<button type="submit">Convert</button>
+	</form>
+</body>
+</html>
+
+<!--
+
+	A form with 3 inputs: text for currency from, text for currency to, text for number amount
+	- validate currency codes (or display error)
+	- validate number (or display error)
+	- display converted amount, with symbol, rounded to 2 decimal places
+	- refactor code so logic that isn't about the route goes to other functions
+	- write tests for flask routes and any other functions
+
+	files:
+	- app.py
+	- logic.py
+	- index.html
+
+	QUESTIONS:
+	- how many html pages do I need? One home page and one results page?
+	- will each new results page just show up on the same results page, with the parameters
+	    in the query string?
+	-
+
+	TODO:
+	- make html front page
+	- make it a template and build a results.html file
+	- make app.py take in form data and call a conversion function and send results to results.html
+	- write conversion function
+
+ -->
