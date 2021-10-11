@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
-from forex_python.converter import CurrencyRates, CurrencyCodes
+# from forex_python.converter import CurrencyRates, CurrencyCodes
 from logic import convert, validate_currency
 
 
@@ -9,10 +9,12 @@ app.config['SECRET_KEY'] = "oh-so-secret"
 
 debug = DebugToolbarExtension(app)
 
+
 @app.route("/")
 def show_homepage():
     """Show the currency conversion form """
     return render_template("form.html")
+
 
 @app.route("/results")
 def convert_currency():
@@ -20,8 +22,8 @@ def convert_currency():
     user to the results"""
     num_of_errors = 0
     #
-    currency_from = request.args["converting_from"]
-    currency_to = request.args["converting_to"]
+    currency_from = request.args["converting_from"].upper()
+    currency_to = request.args["converting_to"].upper()
     currency_from_errors = validate_currency(currency_from)
     currency_to_errors = validate_currency(currency_to)
     amount = request.args["amount"]
@@ -43,5 +45,5 @@ def convert_currency():
         return render_template('form.html')
 
     results = convert(currency_from, currency_to, amount)
-    print('results= ', results)
+    print('results== ', results)
     return render_template("results.html", results=results)

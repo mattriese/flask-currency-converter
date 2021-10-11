@@ -1,20 +1,26 @@
-#from flask import Flask, request, render_template
-##from flask_debugtoolbar import DebugToolbarExtension
-from forex_python.converter import CurrencyRates, CurrencyCodes
 from flask import flash
+# from flask_debugtoolbar import DebugToolbarExtension
+from forex_python.converter import CurrencyRates, CurrencyCodes, RatesNotAvailableError
 
-s = CurrencyCodes()
-c = CurrencyRates()
+codes = CurrencyCodes()
+rates = CurrencyRates()
+
 
 def convert(currency_from, currency_to, amount):
     """logic for converting the currency"""
-    symbol = s.get_symbol(currency_to)
-    return f'{symbol} {round(c.convert(currency_from, currency_to, amount), 2)}'
+    symbol = codes.get_symbol(currency_to)
+    try:
+        print('to, from, amt ==', currency_from, currency_to, amount)
+        converted_amt = rates.convert(currency_from, currency_to, amount)
+    except RatesNotAvailableError:
+        return None
+    return f'{symbol} {round(converted_amt, 2)}'
+
 
 def validate_currency(currency_code):
-    """tests to see if fore_python.converter will raise an error and flashes a message if so"""
+    """tests to see if forex_python.converter will raise an error and flashes a message if so"""
     try:
-        rate = c.get_rates(currency_code)
+        rate = rates.get_rates(currency_code)
         return 0
     except:
         flash(f'Error: {currency_code} is not a valid currency')
