@@ -1,0 +1,20 @@
+
+h1 {
+	display: inline-block;
+	margin: 15px;
+}
+
+#content {
+	margin: 20px;
+}
+
+body {
+	background-color:#ccffcc;
+}
+
+input {
+	margin-bottom: 10px;
+}
+ button {
+	 margin-top: 10px;
+ }

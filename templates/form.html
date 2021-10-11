@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- error messages: make a list of error messages that gets passed to this template.
+then loop over that list and print out a div with the text of the error in it
+{% for error in errors %}
+<div>{{ error }}</div>
+{% endfor %}
+-->
+{% for msg in get_flashed_messages() %}
+  <p>{{ msg }}</p>
+{% endfor %}
+
+<form action="/results">
+	Currency converting from:
+	<br>
+	<input type="text" name="converting_from">
+	<br>
+	Currency converting to:
+	<br>
+	<input type="text" name="converting_to">
+	<br>
+	Amount:
+	<br>
+	<input type="text" name="amount">
+	<br>
+	<button type="submit">Convert</button>
+	{% endblock %}

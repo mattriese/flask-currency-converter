@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="/static/style.css">
+
+	<title>Currency Converter</title>
+</head>
+<body>
+	<h1>Currency Converter</h1>
+	<hr>
+	<div id="content">
+	{% block content %} CONTENT GOES HERE {% endblock %}
+	</div>
+
+</body>
+</html>
+
+<!--
+
+	A form with 3 inputs: text for currency from, text for currency to, text for number amount
+	- validate currency codes (or display error)
+	- validate number (or display error)
+	- display converted amount, with symbol, rounded to 2 decimal places
+	- refactor code so logic that isn't about the route goes to other functions
+	- write tests for flask routes and any other functions
+
+	files:
+	- app.py
+	- logic.py
+	- index.html
+
+	QUESTIONS:
+	- how many html pages do I need? One home page and one results page?
+	- will each new results page just show up on the same results page, with the parameters
+	    in the query string?
+	-
+
+	TODO:
+	- handle errors for currency code and improper number
+		- (when I used xxx, usd, 100, I got: raise RatesNotAvailableError("Currency Rates Source Not Ready"))
+		- (when I tried to use a as an amount I got "ValueError: could not convert string to float: 'a'")
+		- (when I didn't fill out amount at all I got "ValueError: could not convert string to float: ''")
+		- value error happens in app.py on line 20: amount = float(request.args["amount"])
+		- (when I Didn't fill out a currency field I got "raise RatesNotAvailableError("Currency {0} => {1} rate not available for Date {2}.".format(""   )
+		- RatesNotAvailableError comes at line 12 of logic.py = result = round(c.convert(currency_from, currency_to, amount), 2)
+	- make results nice, put currency from also
+	- put home button on results page
+
+-->
